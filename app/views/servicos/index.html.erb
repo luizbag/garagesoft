@@ -1,0 +1,40 @@
+<!-- Page Content -->
+<div class="container">
+
+  <!-- Page Heading/Breadcrumbs -->
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Serviços
+        <small>O que nós fazemos?</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><%= link_to "GarageSoft", root_path %></li>
+        <li class="active">Serviços</li>
+      </ol>
+    </div>
+  </div>
+  <!-- /.row -->
+  <!-- Service Tabs -->
+  <div class="row">
+    <div class="col-lg-12">
+      <ul id="myTab" class="nav nav-tabs nav-justified">
+        <% @servicos.each_with_index do |servico, index| %>
+        <li <% if index == 0 %>class="active"<% end %>><a href="#servico-<%= servico.id %>" data-toggle="tab"><%= servico.titulo %></a>
+        </li>
+        <% end %>
+      </ul>
+      <div id="myTabContent" class="tab-content">
+        <% @servicos.each_with_index do |servico, index| %>
+        <div class="tab-pane fade <% if index == 0 %>active<% end %> in" id="servico-<%= servico.id %>">
+          <h4><%= servico.titulo %></h4>
+          <%= servico.desc_curta %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <% if current_usuario %>
+  <%= link_to 'New Servico', new_servico_path %>
+  <% end %>
